@@ -1,12 +1,12 @@
-package main.java.com.project.Mysql;
+package com.project.Mysql;
 
-public class Livro {
+public class Book {
 
     private String title;
     private String author;
     private int year;
 
-    public Livro(String title, String author, int year) {
+    public Book(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
