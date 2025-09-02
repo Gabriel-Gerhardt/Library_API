@@ -1,8 +1,8 @@
 package com.project.Mysql;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.UUID;
@@ -13,7 +13,8 @@ public class Book {
 
     @Column(name = "id")
     @Id
-    private UUID id;
+    @GeneratedValue
+    private UUID id = UUID.randomUUID();
 
     @Column(name = "title")
     private String title;
@@ -29,6 +30,8 @@ public class Book {
         this.author = author;
         this.year = year;
     }
+
+    public Book() {}
 
     public String getTitle() {
         return title;
