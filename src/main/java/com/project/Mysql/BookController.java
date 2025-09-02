@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class BookController {
 
+    public BookController() {}
+
     @RequestMapping("/book")
     @ResponseBody
     public String getBooks() {
