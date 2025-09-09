@@ -3,18 +3,17 @@ package com.project.Mysql;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.util.UUID;
 
 @Entity
 @Table(name = "books")
 public class Book {
 
-    @Column(name = "id")
     @Id
-    @GeneratedValue
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -22,7 +21,7 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "year")
+    @Column(name = "publish_year")
     private int year;
 
     public Book(String title, String author, int year) {
@@ -48,5 +47,21 @@ public class Book {
     @Override
     public String toString() {
         return title + " (" + author + ", " + year + ")";
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setPublishYear(int year) {
+        this.year = year;
     }
 }
