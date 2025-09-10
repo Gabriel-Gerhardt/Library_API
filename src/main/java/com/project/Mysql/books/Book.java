@@ -1,4 +1,4 @@
-package com.project.Mysql;
+package com.project.Mysql.books;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

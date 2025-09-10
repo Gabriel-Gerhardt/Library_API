@@ -5,15 +5,10 @@ CREATE TABLE books(
     publish_year INT NOT NULL
 );
 
-CREATE TABLE library(
+CREATE TABLE users(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-CREATE TABLE library_books(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    library_id INT NOT NULL,
-    FOREIGN KEY (library_id) REFERENCES library(id),
-
-    book_id INT NOT NULL,
-    FOREIGN KEY (book_id) REFERENCES books(id)
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('USER', 'LIBRARIAN') DEFAULT 'USER'
 );
