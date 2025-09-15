@@ -2,8 +2,11 @@ package com.project.Mysql.books;
 
 import com.project.Mysql.user.Role;
 import com.project.Mysql.user.User;
+import com.project.Mysql.utils.AuthUtils;
+import com.project.Mysql.utils.CookiesUtils;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +27,8 @@ public class BookController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Book>> getAllBooks(HttpSession session) {
-        if (!isAuthenticated(session)) {
+    public ResponseEntity<List<Book>> getAllBooks() {
+        if (!cookieUtils.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok(repository.findAll());
@@ -50,14 +53,5 @@ public class BookController {
     ) {
         Book book = new Book(title, author, year);
         return repository.save(book);
-    }
-
-    public boolean isAuthenticated(HttpSession session) {
-        return session.getAttribute("user") != null;
-    }
-
-    public boolean isLibrarian(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        return user != null && user.getRole() == Role.LIBRARIAN;
     }
 }

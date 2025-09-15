@@ -24,26 +24,18 @@ public class LoginController {
         @RequestBody Login req,
         HttpSession session
     ) {
-        try {
-            User user = userRepository.findByEmailAndPassword(
-                req.getEmail(),
-                req.getPassword()
-            );
-            session.setAttribute("user", user); // salva sessão
-            return ResponseEntity.ok("Login realizado");
-        } catch (IllegalArgumentException e) {
+        User user = userRepository.findByEmailAndPassword(
+            req.getEmail(),
+            req.getPassword()
+        );
+
+        if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                e.getMessage()
+                "Usuário ou senha inválidos"
             );
         }
-    }
 
-    public boolean isAuthenticated(HttpSession session) {
-        return session.getAttribute("user") != null;
-    }
-
-    public boolean isLibrarian(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        return user != null && user.getRole() == Role.LIBRARIAN;
+        session.setAttribute("user", user); // salva na sessão
+        return ResponseEntity.ok("Login realizado");
     }
 }

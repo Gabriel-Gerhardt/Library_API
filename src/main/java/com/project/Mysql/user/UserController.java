@@ -42,13 +42,4 @@ public class UserController {
         }
         throw new IllegalArgumentException("Invalid email or password");
     }
-
-    public boolean isAuthenticated(HttpSession session) {
-        return session.getAttribute("user") != null;
-    }
-
-    public boolean isLibrarian(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        return user != null && user.getRole() == Role.LIBRARIAN;
-    }
 }
